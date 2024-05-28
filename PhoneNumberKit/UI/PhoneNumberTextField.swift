@@ -131,47 +131,6 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
         get { _withDefaultPickerUI }
         set { _withDefaultPickerUI = newValue }
     }
-    
-    // MARK: - Placeholder
-    
-    open var placeholderFont: UIFont? {
-        didSet {
-            topPlaceholderLabel.font = placeholderFont
-        }
-    }
-    
-    public weak var topPlaceholderLabel: UILabel!
-    
-    public var placeHolderText = "" {
-        didSet {
-            if !placeHolderText.isEmpty {
-                topPlaceholderLabel.text = placeHolderText
-                topPlaceholderLabel.isHidden = isEditing || !text!.isEmpty
-            }
-        }
-    }
-    
-    private func setupTopPlaceholder() {
-        let topPlaceholder = UILabel()
-        topPlaceholder.font = placeholderFont
-        topPlaceholder.textColor = UIColor(146, 146, 146)
-        topPlaceholder.isHidden = isEditing || !text!.isEmpty
-        topPlaceholder.text = placeHolderText
-        addSubview(topPlaceholder)
-        topPlaceholder.translatesAutoresizingMaskIntoConstraints = false
-        let verticalConstraint = NSLayoutConstraint(item: topPlaceholder, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 6)
-        let horizontalConstraint = NSLayoutConstraint(item: topPlaceholder, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 16)
-        topPlaceholder.addConstraints([horizontalConstraint, verticalConstraint])
-        topPlaceholderLabel = topPlaceholder
-    }
-    
-    private var textObservation: NSKeyValueObservation?
-    
-    private func observeTextChange() {
-        textObservation = observe(\.text, options: .new) { _, _ in
-            self.topPlaceholderLabel.isHidden = self.isEditing || !self.text!.isEmpty
-        }
-    }
 
     public var withDefaultPickerUIOptions: CountryCodePickerOptions = .init()
 
@@ -257,7 +216,6 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     private var clearButtonPadding: CGFloat?
     
     public var padding = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
-    public var placeholderPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
     // MARK: Lifecycle
 
@@ -330,8 +288,6 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
         self.autocorrectionType = .no
         self.keyboardType = .phonePad
         super.delegate = self
-        observeTextChange()
-        setupTopPlaceholder()
     }
 
     func internationalPrefix(for countryCode: String) -> String? {
