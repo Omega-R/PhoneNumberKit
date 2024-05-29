@@ -16,6 +16,8 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     public let phoneNumberKit: PhoneNumberKit
 
     public lazy var flagButton = UIButton()
+    
+    open var topPlaceholderLabel: UILabel?
 
     /// Override setText so number will be automatically formatted when setting text by code
     override open var text: String? {
