@@ -218,7 +218,6 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     private var clearButtonPadding: CGFloat?
     
     public var padding = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
-    public var placeholderPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
     // MARK: Lifecycle
 
@@ -578,7 +577,7 @@ extension PhoneNumberTextField {
     }
     
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        bounds.inset(by: placeholderPadding)
+        bounds.inset(by: padding)
     }
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
