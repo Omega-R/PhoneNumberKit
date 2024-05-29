@@ -216,6 +216,7 @@ open class PhoneNumberTextField: UITextField, UITextFieldDelegate {
     private var clearButtonPadding: CGFloat?
     
     public var padding = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+    public var placeholderPadding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
     // MARK: Lifecycle
 
@@ -607,9 +608,3 @@ extension String {
 }
 
 #endif
-
-extension UIColor {
-    convenience init(_ r: Int, _ g: Int, _ b: Int, _ a: CGFloat = 1.0) {
-        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: a)
-    }
-}
