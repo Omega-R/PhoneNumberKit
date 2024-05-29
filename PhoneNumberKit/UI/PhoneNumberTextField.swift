@@ -574,23 +574,15 @@ extension PhoneNumberTextField: CountryCodePickerDelegate {
 extension PhoneNumberTextField {
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        if let insets = self.insets {
-            return super.textRect(forBounds: bounds.inset(by: insets))
-        } else {
-            return bounds.inset(by: padding)
-        }
-    }
-
-    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        if let insets = self.insets {
-            return super.editingRect(forBounds: bounds.inset(by: insets))
-        } else {
-            return bounds.inset(by: padding)
-        }
+        bounds.inset(by: padding)
     }
     
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         bounds.inset(by: placeholderPadding)
+    }
+    
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        bounds.inset(by: padding)
     }
 
     override open func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
